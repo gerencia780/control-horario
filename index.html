@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f7a55">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Control Horario">
+<title>Control Horario</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icono-192.png">
+<link rel="apple-touch-icon" href="icono-192.png">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<main>
+  <header>
+    <small id="empresa"></small>
+    <h1>Control Horario</h1>
+    <div id="banda" class="banda" role="status" hidden></div>
+  </header>
+
+  <section id="pSinConfig" class="tarjeta" hidden>
+    <h2>App sin configurar</h2>
+    <p>Falta la dirección del servicio en config.js.</p>
+  </section>
+
+  <section id="pVincular" class="tarjeta" hidden>
+    <h2>Vincular este celular</h2>
+    <p class="estado">Solo se hace una vez y necesita internet. Después podrás marcar sin señal.</p>
+    <form id="fVincular">
+      <label for="cedula">Cédula</label>
+      <input id="cedula" inputmode="numeric" autocomplete="username" required>
+      <label for="pinNuevo">PIN</label>
+      <input id="pinNuevo" type="password" inputmode="numeric" autocomplete="current-password" required>
+      <button class="primario" type="submit" id="bVincular">Vincular</button>
+    </form>
+    <div id="eVincular" class="mensaje error" role="alert" hidden></div>
+  </section>
+
+  <section id="pAutorizar" class="tarjeta" hidden>
+    <h2>Autorización de datos</h2>
+    <p>Para registrar tu ingreso y salida, la empresa guarda tu nombre, cédula, hora, ubicación GPS y una foto en el momento de cada registro. Se usan solo para el control de asistencia, el cálculo de horas y la nómina. La ubicación se toma únicamente al marcar, no durante la jornada. Puedes pedir conocer, corregir o actualizar tus datos a la administración.</p>
+    <button class="primario" id="bAcepto">Acepto</button>
+    <div id="eAutorizar" class="mensaje error" role="alert" hidden></div>
+  </section>
+
+  <section id="pPin" class="tarjeta" hidden>
+    <h2 id="saludoPin"></h2>
+    <form id="fPin">
+      <label for="pin">PIN</label>
+      <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" required>
+      <button class="primario" type="submit" id="bPin">Continuar</button>
+    </form>
+    <div id="ePin" class="mensaje error" role="alert" hidden></div>
+  </section>
+
+  <section id="pMarcar" hidden>
+    <div class="tarjeta">
+      <h2 id="saludo"></h2>
+      <div class="hora" id="reloj"></div>
+      <div class="estado" id="estadoTurno"></div>
+    </div>
+    <div class="tarjeta">
+      <div id="bloqueObra">
+        <label for="obra" class="primero">Obra o cliente</label>
+        <select id="obra"></select>
+      </div>
+      <div class="fila">
+        <div><strong>Ubicación</strong><div class="estado" id="estadoGps"></div></div>
+        <button id="bGps" type="button" hidden>Reintentar</button>
+      </div>
+      <div class="fila">
+        <div><strong>Selfie</strong><div class="estado" id="estadoFoto"></div><img id="vistaFoto" alt="Tu foto" hidden></div>
+        <button id="bFoto" type="button">Tomar foto</button>
+        <input id="foto" type="file" accept="image/*" capture="user" hidden>
+      </div>
+      <label for="observaciones">Observaciones (opcional)</label>
+      <textarea id="observaciones" maxlength="500"></textarea>
+      <button class="primario grande" id="bMarcar" disabled></button>
+      <div id="eMarcar" class="mensaje error" role="alert" hidden></div>
+    </div>
+    <button class="enlace" id="bSalir" type="button">Cerrar</button>
+  </section>
+
+  <section id="pListo" class="tarjeta exito" hidden>
+    <h2 id="listoTitulo"></h2>
+    <div class="hora mediana" id="listoHora"></div>
+    <div id="listoDetalle"></div>
+    <div id="listoEnvio" class="estado"></div>
+    <button class="primario" id="bFin">Terminar</button>
+  </section>
+
+  <section id="pCola" class="tarjeta" hidden>
+    <div class="fila">
+      <div><strong>Envío</strong><div class="estado" id="estadoCola"></div></div>
+      <button id="bEnviar" type="button" hidden>Enviar ahora</button>
+    </div>
+  </section>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
